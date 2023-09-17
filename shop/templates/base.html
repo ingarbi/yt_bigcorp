@@ -52,6 +52,30 @@
     <title>BigCorp</title>
 
     <style>
+
+      .badge {
+        padding-left: 9px;
+        padding-right: 9px;
+        -webkit-border-radius: 9px;
+        -moz-border-radius: 9px;
+        border-radius: 9px;
+      }
+  
+      .label-warning[href],
+      .badge-warning[href] {
+        background-color: #c67605;
+      }
+      #lblCartCount {
+          font-size: 12px;
+          background: #3c9700;
+          color: #fff;
+          padding: 0 5px;
+          vertical-align: top;
+          margin-left: -2px; 
+      }
+  
+
+
       a {
         font-size: 14px;
         font-weight: 700;
@@ -124,7 +148,7 @@
       class="navbar navbar-expand-lg bg-white sticky-top navbar-light p-3 shadow-sm "
     >
       <div class="container">
-        <a class="navbar-brand" href="#"
+        <a class="navbar-brand" href="{% url 'shop:products' %}"
           ><i class="fa-solid fa-shop me-2"></i>
           <strong>BigCorp SHOP</strong></a
         >
@@ -224,9 +248,20 @@
           </ul>
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link mx-2 text-uppercase" href="#"
-                > <i class="fa fa-shopping-cart" aria-hidden="true"> </i> Cart</a
-              >
+              <a class="nav-link mx-2 text-uppercase" href="{% url 'cart:cart-view' %}"
+                > <i class="fa fa-shopping-cart" aria-hidden="true"> </i> Cart
+                <span id="lblCartCount" class="badge badge-warning ">
+
+                  {% with cart_qty=cart|length%}
+                    {% if cart_qty > 0 %}
+                    {{cart_qty}}
+                    {% else %}
+                      0
+                    {% endif %}
+
+                  {% endwith %}
+                </span>
+                </a>
             </li>
             <li class="nav-item">
               <a class="nav-link mx-2 text-uppercase" href="#"

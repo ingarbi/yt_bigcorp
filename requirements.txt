@@ -1,0 +1,5 @@
+asgiref==3.7.2
+Django==4.2.4
+django-mathfilters==1.0.0
+Pillow==10.0.0
+sqlparse==0.4.4
