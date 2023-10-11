@@ -53,6 +53,12 @@
 
     <style>
 
+        
+      .form-layout {
+        border-radius: 20px;
+        width: 500px;
+    }
+
       .badge {
         padding-left: 9px;
         padding-right: 9px;
@@ -263,11 +269,32 @@
                 </span>
                 </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link mx-2 text-uppercase" href="#"
-                ><i class="fa-solid fa-circle-user me-1"></i> Account</a
-              >
-            </li>
+              {% if request.user.is_authenticated %}
+              
+              <li class="nav-item">
+                <a class="nav-link mx-2 text-uppercase" href="{% url 'account:dashboard' %}"
+                  ><i class="fa-solid fa-circle-user me-1"></i>@{{ user.username }} Account</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link mx-2 text-uppercase" href="{% url 'account:logout' %}"
+                  ><i class="fa-solid fa-circle-user me-1"></i> Logout</a
+                >
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link mx-2 text-uppercase" href="{% url 'account:register' %}"
+                  ><i class="fa-solid fa-circle-user me-1"></i> Register</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link mx-2 text-uppercase" href="{% url 'account:login' %}"
+                  ><i class="fa-solid fa-circle-user me-1"></i> Login</a
+                >
+              </li>
+              {% endif %}
+
             
           </ul>
         </div>
