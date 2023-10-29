@@ -4,28 +4,11 @@
 
 {% load crispy_forms_tags %}
 
-<style>
-    body{
-        background-color: gray;
-    }
-
-    .btn-register{
-        transition: 0.5s;
-    }
-
-    .btn-register:hover {
-        background-color: forestgreen;
-        transform: scale(1.1);
-    }
-</style>
-
-
 {% block content %}
-<br>
 
 <div class="container bg-white shadow-md p-5 form-layout">
     
-    <h3>Authentication</h3>
+    <h3>Shipping</h3>
     
     <br>
 
@@ -58,16 +41,9 @@
     </ul>
 {% endif %}
 
-    <div class="text-center">
-        <a href="{% url 'account:register' %}">Dont have an account?</a>
-    </div>
-
-    <br>
-    <div class="text-center">
-        <a href="{% url 'account:password_reset' %}">Forgot password?</a>
-    </div>
+    
 </div>
 
 <br>
 
-{% endblock %}
+{% endblock content %}

@@ -45,7 +45,7 @@ def login_user(request):
 
     if request.method == 'POST':
 
-        form = LoginForm(request.POST)
+        form = LoginForm(request.POST, request.FILES)
 
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -65,6 +65,11 @@ def login_user(request):
 
 
 def logout_user(request):
+    session_keys = list(request.session.keys())
+    for key in session_keys:
+        if key == 'session_key':
+            continue
+        del request.session[key]
     logout(request)
     return redirect('shop:products')
 

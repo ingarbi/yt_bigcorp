@@ -1,0 +1,178 @@
+
+{% include "base.html" %}
+
+
+{% load static %}
+
+
+{% block content %}
+
+<style>
+    
+    body 
+    {
+        
+        background-color: gray;
+    
+    }
+
+
+</style>
+
+
+    <body>
+
+        <br>
+
+        <div class="container bg-white shadow-md p-5" style="width:500px; border-radius:20px;">
+
+            <form id="form">
+
+                <div>
+
+                    <h3> <i class="fa fa-chevron-circle-right" aria-hidden="true"></i> &nbsp; Complete your order </h3>
+
+                    <p> Please enter in the relevant information below. </p>
+ 
+
+
+                    <hr>
+
+                    <br>
+
+                    <div class="form-field">
+                    
+                        <input class="form-control validate" id="name" type="text" placeholder="Full name*" autocomplete="off" value="{{shipping_address.full_name}}" required>
+
+                    </div>
+
+
+                    <br>
+
+
+                    <div class="form-field">
+
+                        <input class="form-control validate" id="email" type="email" placeholder="Email address*" autocomplete="off" value="{{shipping_address.email}}" required>
+
+                    </div>
+
+                    
+                    <br>
+
+                    
+                    <div class="form-field">
+
+                        <input class="form-control validate" id="address1" type="text" placeholder="Street address*" autocomplete="off" value="{{shipping_address.street_address}}" required>
+
+                    </div>
+
+
+                    <br>
+
+
+                    <div class="form-field">
+
+                        <input class="form-control validate" id="address2" type="text" placeholder="Apartment address" autocomplete="off" value="{{shipping_address.apartment_address}}" required>
+
+                    </div>
+
+
+                    <br>
+
+
+                    {% comment %} <div class="form-field">
+
+                        <input class="form-control validate" id="city" type="text" placeholder="City*" autocomplete="off" value="{{shipping_address.city}}" required>
+
+                    </div> {% endcomment %}
+
+
+                    <br>
+
+
+                    <div class="form-field">
+
+                        <input class="form-control" id="state" type="text" placeholder="Country" autocomplete="off" value="{{shipping_address.country}}">
+
+                    </div>
+
+
+                    <br>
+
+
+                    <div class="form-field">
+
+                        <input class="form-control" id="zipcode" type="text" placeholder="Zip code (Optional)" autocomplete="off" value="{{shipping_address.zip}}">
+
+                    </div>
+            
+                </div>
+
+                <br>
+
+
+
+               <button id="complete-order" type="submit" class="btn btn-primary navbar-btn text-white"> &nbsp; Complete order </button>
+               
+
+                <br>
+
+
+
+
+            </form>
+
+
+        </div>
+
+        
+
+        <br>
+
+
+    </body>
+
+
+    <!-- Ajax integration -->
+
+    
+
+    
+<script>
+    $(document).on('submit', function(e){
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: '{% url "payment:complete-order" %}',
+            data: {
+                name: $('#name').val(),
+                email: $('#email').val(),
+                street_address: $('#address1').val(),
+                apartment_address: $('#address2').val(),
+                // city: $('#city').val(),
+                contry: $('#state').val(),
+                zipcode: $('#zipcode').val(),
+
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'payment'
+            },
+            success: function(response){
+                window.location.replace('{% url "payment:payment-success" %}')
+                
+            }, 
+            error: function(error){
+                window.location.replace('{% url "payment:payment-failed" %}')
+            }
+        })
+
+    })
+
+
+</script>
+
+
+
+
+
+{% endblock %}
