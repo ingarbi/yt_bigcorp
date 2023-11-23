@@ -26,7 +26,7 @@
 
         <div class="container bg-white shadow-md p-5" style="width:500px; border-radius:20px;">
 
-            <form id="form">
+            <form id="form" action="{% url 'payment:complete-order' %}" method="post">
 
                 <div>
 
@@ -109,11 +109,11 @@
                 </div>
 
                 <br>
+                    {% csrf_token %}
 
 
-
-               <button id="complete-order" type="submit" class="btn btn-primary navbar-btn text-white"> &nbsp; Complete order </button>
-               
+               <button id="complete-order-stripe" type="submit" class="btn btn-primary navbar-btn text-white" name="stripe-payment" value="stripe-payment"> &nbsp; Pay with Stripe </button>
+               <button id="complete-order-yookassa" type="submit" class="btn btn-primary navbar-btn text-white" name="yookassa-payment" value="yookassa-payment"> &nbsp; Pay with YooKassa </button>
 
                 <br>
 
@@ -131,48 +131,5 @@
 
 
     </body>
-
-
-    <!-- Ajax integration -->
-
-    
-
-    
-<script>
-    $(document).on('submit', function(e){
-        e.preventDefault();
-
-        $.ajax({
-            type: 'POST',
-            url: '{% url "payment:complete-order" %}',
-            data: {
-                name: $('#name').val(),
-                email: $('#email').val(),
-                street_address: $('#address1').val(),
-                apartment_address: $('#address2').val(),
-                // city: $('#city').val(),
-                contry: $('#state').val(),
-                zipcode: $('#zipcode').val(),
-
-                csrfmiddlewaretoken: '{{ csrf_token }}',
-                action: 'payment'
-            },
-            success: function(response){
-                window.location.replace('{% url "payment:payment-success" %}')
-                
-            }, 
-            error: function(error){
-                window.location.replace('{% url "payment:payment-failed" %}')
-            }
-        })
-
-    })
-
-
-</script>
-
-
-
-
 
 {% endblock %}

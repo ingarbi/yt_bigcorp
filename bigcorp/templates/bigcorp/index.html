@@ -1,0 +1,23 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to BigCorp</title>
+    <link rel="stylesheet" href="{% static 'bigcorp/css/style.css' %}"/>
+    <link rel="stylesheet" href="{% static 'fonts/montserrat:wght@300,400,500.css' %}"/>
+  </head>
+
+  <body style="font-family: 'Montserrat', sans-serif;">
+    <div id="welcome" class="welcome" >Welcome to BigCorp</div>
+    <a href="http://127.0.0.1:8000/shop/"><div id="box1" class="box box1">Shop</div></a>
+    <div class="box box2">News</div>
+    <div class="box box3">Etc</div>
+  </body>
+
+<script src="{% static 'bigcorp/js/box-change.js' %}"></script>
+
+</html>
