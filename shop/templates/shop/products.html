@@ -35,26 +35,7 @@
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
 
-      {% for product in products %}
-      <div class="col">
-        <a class="text-black  text-decoration-none fs-4" href="{{product.get_absolute_url}}">
-          <div class="card shadow-sm h-100">
-            {% thumbnail product.image "300x300" as im %}
-            <img class="img-fluid h-100" alt="Responsive image" src="{{ im.url }}" />
-            {% endthumbnail %}
-            <div class="card-body">
-              <p class="card-text ">
-                {{product.title|capfirst}}
-              </p>
-              <div class="d-flex justify-content-between align-items-center badge search-button text-wrap text-dark"
-                style="width: 6rem;">
-                <h5>$ {{product.price}}</h5>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-      {% endfor %}
+      {% include 'shop/components/product_list.html' %}
     </div>
   </div>
 </section>

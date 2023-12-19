@@ -66,3 +66,44 @@ transform: rotate(-90deg);
 .search-button {
   background-color: #45EDAD;
 }
+
+
+.alert-primary {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.alert-secondary {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.alert-success {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.alert-danger {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.alert-warning {
+  background-color: #ffc107;
+  color: #fff;
+}
+
+.alert-info {
+  background-color: #17a2b8;
+  color: #fff;
+}
+
+.alert-light {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+.alert-dark {
+  background-color: #343a40;
+  color: #fff;
+}

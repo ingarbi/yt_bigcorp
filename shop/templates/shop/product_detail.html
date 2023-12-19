@@ -12,7 +12,7 @@
 
             <div class="col-md-5 col-lg-5 order-md-first bg-light">
 
-                <img class="img-fluid mx-auto d-block" alt="Responsive image" src="{{product.image.url}}">
+                <img class="img-fluid mx-auto d-block" alt="Responsive image" src="{{product.full_image_url}}">
                 <!-- Product image -->
 
             </div>
@@ -36,10 +36,12 @@
                     <div class="col border-bottom">
 
                         <div class="row p-3">
-
                             <div class="col-6"> Price </div>
-
+                            {% if product.discount %}
+                            <div class="col-6 text-end"><span class="text-decoration-line-through fw-bold text-danger">$ {{product.price}} <span class="badge rounded-pill bg-info">discount</span></span> <span class="h4 fw-bold">$ {{product.get_discounted_price}}</span></div>
+                            {% else%}
                             <div class="col-6 text-end"><span class="h4 fw-bold">$ {{product.price}}</span></div>
+                            {% endif %}
 
                         </div>
 
@@ -95,6 +97,8 @@
     </main>
 
     <br>
+
+    {% include 'recommend/recommendation.html' %}
 
 </div>
 

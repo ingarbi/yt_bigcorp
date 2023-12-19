@@ -6,24 +6,27 @@
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
-        <div class="mx-auto my-3 d-lg-none d-sm-block d-xs-block">
+        <form action="{% url 'shop:search-products' %}" method="get">
+            <div class="mx-auto my-3 d-lg-none d-sm-block d-xs-block">
             <div class="input-group">
                 <span class="border-success input-group-text bg-success text-white"><i
                         class="fa-solid fa-magnifying-glass"></i></span>
-                <input type="text" class="form-control border-success" style="color: #7a7a7a" />
+                <input type="text" name="q" placeholder="ex. Samsung" class="form-control border-success" style="color: #7a7a7a" />
                 <button class="btn btn-success text-dark search-button">Search</button>
             </div>
         </div>
+    </form>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <form action="{% url 'shop:search-products' %}" method="get">
             <div class="ms-auto d-none d-lg-block">
                 <div class="input-group">
                     <span class="border-success input-group-text text-white search-button"><i
                             class="fa-solid fa-magnifying-glass"></i></span>
-                    <input type="text" class="form-control border-success" style="color: #7a7a7a" />
+                    <input type="text" name="q" placeholder="ex. Samsung" class="form-control border-success" style="color: #7a7a7a" />
                     <button class="btn btn-success text-dark search-button">Search</button>
                 </div>
             </div>
+        </form>
             <ul class="navbar-nav ms-auto">
                 {% for i in categories %}
 

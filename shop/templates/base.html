@@ -22,6 +22,8 @@
     <!-- Navbar -->
     {% include 'shop/_partials/_navbar.html' %}
 
+    <!-- Messages -->
+    {% include 'shop/_partials/_messages.html' %}
     <main>
       <!-- Content -->
       {% block content %} {% endblock %}
@@ -32,4 +34,5 @@
 
   <!-- Script -->
   <script src="{% static 'shop/js/base.js' %}" ></script>
+  <script src="https://unpkg.com/htmx.org@1.9.9" integrity="sha384-QFjmbokDn2DjBjq+fM+8LUIVrAgqcNW2s0PjAxHETgRn9l4fvX31ZxDxvwQnyMOX" crossorigin="anonymous"></script>
 </html>

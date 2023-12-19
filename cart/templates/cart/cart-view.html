@@ -18,7 +18,7 @@
           class="img-fluid mx-auto d-block"
           width="200px"
           alt="Responsive image"
-          src="{{product.image.url}}"
+          src="{{product.full_image_url}}"
         />
       </div>
 
@@ -36,7 +36,12 @@
               <div class="col-6">Product</div>
 
               <div class="col-6 text-end">
-                <span class="h6 fw-bold">$ {{ product.price|mul:item.qty}}</span>
+                {%if product.discount%}
+                <span class="text-decoration-line-through fw-bold text-danger">$ {{product.price|mul:item.qty}}</span>
+                <span class="h6 fw-bold">$ {{product.get_discounted_price|mul:item.qty}}</span>
+                {% else%}
+                <span class="h6 fw-bold">$ {{product.price|mul:item.qty}}</span>
+                {% endif%}
               </div>
             </div>
           </div>
