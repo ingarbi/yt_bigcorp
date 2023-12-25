@@ -1,0 +1,63 @@
+version: "3.3"
+
+volumes:
+  postgres_data:
+  static_data:
+  media_data:
+
+services:
+  db:
+    image: postgres:13.0-alpine
+    container_name: bigcorp-db
+    env_file: .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+  backend:
+    build: ./backend
+    container_name: bigcorp-backend
+    env_file: .env
+    volumes:
+      - static_data:/app/static
+      - media_data:/app/media
+    depends_on:
+      - db
+    ports:
+      - 8000:8000
+    links:
+      - db
+    restart: always
+    command: sh -c "python3 manage.py makemigrations &&
+                    python3 manage.py migrate &&
+                    python3 manage.py collectstatic --noinput &&
+                    gunicorn bigcorp.wsgi:application --bind 0.0.0.0:8000 &&
+                    stripe listen --forward-to localhost:8000/payment/webhook-stripe/"
+
+  redis:
+    image: redis:7.2.3-alpine
+    container_name: bigcorp-redis
+    restart: unless-stopped
+
+  celery:
+    build: ./backend
+    container_name: bigcorp-celery
+    env_file: .env
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - static_data:/app/static
+    restart: always
+    command: celery -A bigcorp worker --loglevel=info --beat
+
+  nginx:
+    image: nginx:latest
+    container_name: bigcorp-nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - static_data:/app/static
+      - media_data:/app/media
+    ports:
+      - 80:80
+    restart: always
