@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'payment/css/payment-success-fail.css' %}">
+{% endblock head %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-5 ">
+            <div class="message-box _success">
+                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                <h2> Your payment was successful </h2>
+                <p> Thank you for your payment. we will <br>
+                    be in contact with more details shortly </p>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

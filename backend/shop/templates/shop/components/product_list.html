@@ -1,0 +1,27 @@
+{% load thumbnail%}
+{% for product in products %}
+
+{% if forloop.last %}
+<div class="col" hx-get="{% url 'shop:products' %}?page={{ page_obj.number|add:1 }}" hx-trigger="revealed"
+    hx-swap="afterend">
+    {% else %}
+    <div class="col">
+        {% endif %}
+        <a class="text-black text-decoration-none fs-4" href="{{product.get_absolute_url}}">
+            <div class="card shadow-sm h-100">
+                {% thumbnail product.image "400x400" as im %}
+                <img class="img-fluid h-100" alt="Responsive image" src="{{ im.url }}" />
+                {% endthumbnail %}
+                <div class="card-body">
+                    <p class="card-text">
+                        {{product.title|capfirst}}
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center badge search-button text-wrap text-dark"
+                        style="width: 6rem">
+                        <h5>$ {{product.price}}</h5>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+{% endfor %}

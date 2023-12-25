@@ -1,0 +1,109 @@
+<style>
+    .reviews-container {
+        width: 100%;
+        margin-top: 6rem;
+    }
+
+    .reviews-title {
+        font-size: 1.5rem;
+    }
+
+    .review-form {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        background-color: #f2f2f2;
+        border-radius: 1rem;
+    }
+
+    .review-form label {
+        font-weight: bold;
+    }
+
+    .review-form textarea {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 0.25rem;
+    }
+
+    review-form select {
+        width: 50%;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 0.25rem;
+    }
+
+    .review-form button {
+        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+        background-color: #45EDAD;
+        color: rgb(0, 0, 0);
+        border: none;
+        border-radius: 0.25rem;
+        cursor: pointer;
+    }
+
+    .review {
+        padding: 1rem;
+        background-color: #f2f2f2;
+        border-radius: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .review strong {
+        font-weight: bold;
+    }
+
+    .edit-pen {
+        color: blue;
+        cursor: pointer;
+    }
+</style>
+
+<div class="reviews-container">
+    <h2 class="reviews-title">Reviews</h2>
+
+    {% if request.user.is_authenticated %}
+    <form method="post" class="review-form">
+        {% csrf_token %}
+        <div>
+            <label for="rating">Rating</label><br>
+            <select name="rating" id="rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3" selected>3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div>
+            <label for="content">Comment</label><br>
+            <textarea name="content" id="content" rows="5" cols="50"></textarea>
+        </div>
+        <div>
+            <button>Submit</button>
+        </div>
+    </form>
+    {% endif %}
+
+    {% for review in product.reviews.all %}
+    <div class="d-flex flex-row bd-highlight mb-3 justify-content-between review " id="review-{{ review.id }}">
+        <div>
+            <strong>Date:</strong> {{ review.created_at|date:"Y-m-d" }}<br>
+            <br>
+            <strong>Rating:</strong> {{ review.rating }}/5<br>
+            <strong>Comment:</strong><br>
+            {{ review.content }}
+        </div>
+       {%  comment %}
+        <div>
+            {% if request.user.is_authenticated and request.user == review.created_by %}
+            {% csrf_token %}
+            <span class="edit-pen" hx-put="{% url 'shop:product-detail' product.slug %}">✏️</span>
+            {% endif %}
+        </div>
+        {% endcomment %}
+    </div>
+    {% endfor %}
+</div>

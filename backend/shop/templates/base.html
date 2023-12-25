@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Head imports -->
+    {% include 'shop/_partials/_head_imports.html' %}
+    <!-- Title -->
+    <title>{% block title %} Home {% endblock %}</title>
+    <!--Custom CSS -->
+    <link rel="stylesheet" href="{% static 'shop/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/montserrat:wght@300,400,500.css' %}"/>
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'shop/images/favicon.ico' %}" >
+    {% block head %} {% endblock head %}
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    {% include 'shop/_partials/_navbar.html' %}
+
+    <!-- Messages -->
+    {% include 'shop/_partials/_messages.html' %}
+    <main>
+      <!-- Content -->
+      {% block content %} {% endblock %}
+    </main>
+    <!-- Footer -->
+    {% include 'shop/_partials/_footer.html' %}
+  </body>
+
+  <!-- Script -->
+  <script src="{% static 'shop/js/base.js' %}" ></script>
+  <script src="https://unpkg.com/htmx.org@1.9.9" integrity="sha384-QFjmbokDn2DjBjq+fM+8LUIVrAgqcNW2s0PjAxHETgRn9l4fvX31ZxDxvwQnyMOX" crossorigin="anonymous"></script>
+</html>

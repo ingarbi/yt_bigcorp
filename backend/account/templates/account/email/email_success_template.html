@@ -1,0 +1,64 @@
+{%  include "base.html" %}
+
+{% load static %}
+
+<style>
+
+    #timer {
+        font-family: sans-serif;
+        font-size: 24px;
+        color: red;
+        font-weight: bold;
+        display: inline-block;
+    }
+</style>
+
+{% block title %}
+    <title>Email confirmation</title>
+{% endblock title %}
+
+{% block content %}
+
+<div class="container bg-white shadow-md p-3">
+    {% if success %}
+
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Электронная почта подтверждена</h4>
+            <p>Ваш адрес электронной почты успешно подтвержден. Спасибо за регистрацию!</p>
+            <p>You will be redirected to the home page in <span  id="timer"></span> seconds</p>
+        </div>
+
+    {% else %}
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Ошибка подтверждения по электронной почте</h4>
+        <p>Ссылка для подтверждения по электронной почте недействительна или срок ее действия истек. Пожалуйста, зарегистрируйтесь снова.</p>
+    </div>
+    {% endif %}
+
+</div>
+
+<script>
+
+    // Set a timeout to redirect the user to the other page after 10 seconds
+    
+    $(document).ready(function() {
+        // Set the initial timer value
+        var timerValue = 7;
+        $('#timer').html(timerValue);
+        
+        // Start a timer that updates the timer every second
+        setInterval(function() {
+            // Update the timer value
+            timerValue--;
+    
+            // Display the timer value
+            $('#timer').html(timerValue);
+    
+            // If the timer value reaches 0, stop the timer
+            if (timerValue === 0) {
+                window.location.href = '/shop/';
+            }
+        }, 1000);
+    });
+    </script>
+{% endblock content %}
