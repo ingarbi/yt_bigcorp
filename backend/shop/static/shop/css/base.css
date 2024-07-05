@@ -1,0 +1,109 @@
+body{
+  font-family: 'Montserrat', sans-serif;
+}
+
+.form-layout {
+    border-radius: 20px;
+    width: 500px;
+}
+
+.badge {
+padding-left: 9px;
+padding-right: 9px;
+-webkit-border-radius: 9px;
+-moz-border-radius: 9px;
+border-radius: 9px;
+}
+
+.label-warning[href],
+.badge-warning[href] {
+background-color: #c67605;
+}
+#lblCartCount {
+font-size: 12px;
+background: #3c9700;
+color: #fff;
+padding: 0 5px;
+vertical-align: top;
+margin-left: -2px; 
+}
+
+a {
+font-size: 14px;
+font-weight: 700;
+}
+.superNav {
+font-size: 13px;
+}
+.form-control {
+outline: none !important;
+box-shadow: none !important;
+}
+.navbar-nav li:hover > ul.dropdown-menu {
+display: block;
+}
+.dropdown-submenu {
+position: relative;
+}
+.dropdown-submenu > .dropdown-menu {
+top: 0;
+left: 100%;
+margin-top: -6px;
+}
+
+/* rotate caret on hover */
+.dropdown-menu > li > a:hover:after {
+text-decoration: underline;
+transform: rotate(-90deg);
+}
+@media screen and (max-width: 540px) {
+.centerOnMobile {
+  text-align: center;
+  } 
+}
+
+/* NavBar Search Button */
+.search-button {
+  background-color: #45EDAD;
+}
+
+
+.alert-primary {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.alert-secondary {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.alert-success {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.alert-danger {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.alert-warning {
+  background-color: #ffc107;
+  color: #fff;
+}
+
+.alert-info {
+  background-color: #17a2b8;
+  color: #fff;
+}
+
+.alert-light {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+.alert-dark {
+  background-color: #343a40;
+  color: #fff;
+}
